@@ -1,0 +1,7 @@
+#!/bin/bash
+set -euo pipefail
+
+useradd -m -G wheel -s /bin/bash avenor
+passwd -d avenor
+echo '%wheel ALL=(ALL:ALL) ALL' > /etc/sudoers.d/wheel
+systemctl set-default graphical.target
