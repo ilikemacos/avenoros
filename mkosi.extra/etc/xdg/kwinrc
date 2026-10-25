@@ -1,0 +1,7 @@
+[Plugins]
+blurEnabled=false
+contrastEnabled=false
+slidingpopupsEnabled=false
+
+[Wayland]
+InputMethod=

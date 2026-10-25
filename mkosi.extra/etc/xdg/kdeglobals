@@ -1,0 +1,7 @@
+[General]
+ColorScheme=Avenor
+font=Noto Sans,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+
+[KDE]
+AnimationDurationFactor=0.5
+LookAndFeelPackage=org.kde.breeze.desktop
