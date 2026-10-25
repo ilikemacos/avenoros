@@ -1,0 +1,14 @@
+[Unit]
+Description=AvenorOS health check
+After=graphical.target
+Before=boot-complete.target
+FailureAction=reboot
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/avenor-health
+RemainAfterExit=yes
+
+[Install]
+RequiredBy=boot-complete.target
+WantedBy=graphical.target

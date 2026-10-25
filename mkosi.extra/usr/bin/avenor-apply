@@ -1,0 +1,58 @@
+#!/bin/bash
+set -euo pipefail
+
+allow_reboot=0
+[[ ${1:-} == --reboot ]] && allow_reboot=1
+
+usr_type=8484680c-9521-48c6-9c11-b0720656f69e
+hash_type=77ff5f63-e7b6-4633-acf4-1565b864c0e6
+sig_type=e7bb33fb-06cf-4e81-8273-e543b413e2e2
+cert=/usr/lib/verity.d/avenoros.crt
+
+part() {
+	lsblk -rno PATH,PARTTYPE,PARTLABEL | awk -v t="$1" -v l="avenoros_$2" '$2 == t && $3 == l { print $1; exit }'
+}
+
+current=$(. /usr/lib/os-release && echo "$IMAGE_VERSION")
+systemd-sysupdate update
+
+latest=$(lsblk -rno PARTTYPE,PARTLABEL | awk -v t="$usr_type" '$1 == t && $2 ~ /^avenoros_/ { sub(/^avenoros_/, "", $2); print $2 }' | sort -V | tail -n1)
+if [[ -z $latest || $latest == "$current" ]]; then
+	echo "up to date: $current"
+	exit 0
+fi
+
+data=$(part "$usr_type" "$latest")
+hash=$(part "$hash_type" "$latest")
+sig=$(part "$sig_type" "$latest")
+[[ -b $data && -b $hash && -b $sig ]] || { echo "incomplete slot for $latest" >&2; exit 1; }
+
+work=$(mktemp -d)
+trap 'rm -rf "$work"' EXIT
+tr -d '\0' < "$sig" > "$work/sig.json"
+roothash=$(jq -r .rootHash "$work/sig.json")
+jq -r .signature "$work/sig.json" | base64 -d > "$work/sig.p7s"
+printf %s "$roothash" > "$work/roothash"
+openssl smime -verify -binary -inform DER -in "$work/sig.p7s" -content "$work/roothash" \
+	-CAfile "$cert" -purpose any -out /dev/null 2>/dev/null || { echo "bad signature for $latest" >&2; exit 1; }
+
+name=usr-$latest
+[[ -e /dev/mapper/$name ]] || veritysetup open "$data" "$name" "$hash" "$roothash"
+mkdir -p /run/nextroot
+mountpoint -q /run/nextroot || mount --bind / /run/nextroot
+mountpoint -q /run/nextroot/usr || mount -t erofs -o ro "/dev/mapper/$name" /run/nextroot/usr
+
+if [[ -d /run/nextroot/usr/lib/modules/$(uname -r) ]]; then
+	echo "soft-reboot into $latest"
+	exec systemctl soft-reboot
+fi
+
+umount /run/nextroot/usr /run/nextroot
+veritysetup close "$name"
+if ((allow_reboot)); then
+	echo "kernel changed, rebooting into $latest"
+	exec systemctl reboot
+fi
+mkdir -p /run/avenor
+echo "$latest" > /run/avenor/reboot-pending
+echo "kernel changed in $latest, reboot pending"

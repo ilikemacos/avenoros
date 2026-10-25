@@ -1,0 +1,11 @@
+#!/bin/bash
+set -u
+
+state=$(systemctl is-system-running --wait)
+case $state in
+running|degraded) ;;
+*) echo "system state: $state" >&2; exit 1 ;;
+esac
+
+findmnt -no SOURCE /usr | grep -q '^/dev/mapper/' || { echo "/usr is not verity-backed" >&2; exit 1; }
+systemctl -q is-active display-manager.service || { echo "display manager down" >&2; exit 1; }
