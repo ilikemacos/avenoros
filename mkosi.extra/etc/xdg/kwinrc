@@ -5,3 +5,11 @@ slidingpopupsEnabled=false
 
 [Wayland]
 InputMethod=
+
+[org.kde.kdecoration2]
+library=org.kde.breeze
+theme=Breeze
+ButtonsOnLeft=
+ButtonsOnRight=IAX
+BorderSize=None
+BorderSizeAuto=false

@@ -1,0 +1,9 @@
+[Common]
+OutlineIntensity=OutlineOff
+ShadowSize=ShadowMedium
+ShadowStrength=90
+
+[Windeco]
+DrawBackgroundGradient=false
+DrawBorderOnMaximizedWindows=false
+TitleAlignment=AlignLeft

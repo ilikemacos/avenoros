@@ -1,7 +1,14 @@
 [General]
 ColorScheme=Avenor
-font=Noto Sans,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+font=Inter,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+menuFont=Inter,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+smallestReadableFont=Inter,8,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+toolBarFont=Inter,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+fixed=Noto Sans Mono,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+
+[WM]
+activeFont=Inter,10,-1,5,500,0,0,0,0,0,0,0,0,0,0,1
 
 [KDE]
 AnimationDurationFactor=0.5
-LookAndFeelPackage=org.kde.breeze.desktop
+LookAndFeelPackage=org.avenor.desktop
