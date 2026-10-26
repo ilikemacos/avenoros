@@ -8,6 +8,7 @@ CARD = "#ffffff"
 LINE = "rgba(46,42,38,0.12)"
 ACCENT = "#607296"
 SHADOW = (60, 44, 30)
+GAP = 16
 
 SIDES = ("top", "bottom", "left", "right")
 CORNERS = ("topleft", "topright", "bottomleft", "bottomright")
@@ -27,9 +28,9 @@ class Sheet:
         self.y = 0
 
     def group(self, name, x, y, w, h, body=""):
-        self.parts.append(
-            f'<g id="{name}"><rect x="{x}" y="{y}" width="{w}" height="{h}" fill="#000" fill-opacity="0"/>{body}</g>'
-        )
+        if not body:
+            body = f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="#000" fill-opacity="0"/>'
+        self.parts.append(f'<g id="{name}">{body}</g>')
 
     def gradient(self, name, kind, stops, **attrs):
         tag = "radialGradient" if kind == "radial" else "linearGradient"
@@ -44,10 +45,10 @@ class Sheet:
         name = (prefix + "-") if prefix else ""
         x0, y0 = 0, self.y
         f = paint(fill, "fill")
-        s = paint(stroke, "stroke") if stroke else None
+        s = paint(stroke, "fill") if stroke else None
         m = r if edge is None else edge
         for i, c in enumerate(CORNERS):
-            x, y = x0 + i * (m + 2), y0
+            x, y = x0 + i * (m + GAP), y0
             cx = x + (m if "left" in c else 0)
             cy = y + (m if c.startswith("top") else 0)
             vertical = "top" if c.startswith("top") else "bottom"
@@ -58,53 +59,53 @@ class Sheet:
                 sweep = 1 if (horizontal == "left") == (vertical == "top") else 0
                 body = f'<path d="M{cx} {cy}L{sx} {cy}A{r} {r} 0 0 {sweep} {cx} {sy}Z" {f}/>'
                 if s:
-                    h = 0.5 if horizontal == "left" else -0.5
-                    v = 0.5 if vertical == "top" else -0.5
-                    body += f'<path d="M{sx + h} {cy}A{r - 0.5} {r - 0.5} 0 0 {sweep} {cx} {sy + v}" fill="none" {s} stroke-width="1"/>'
+                    h = 1 if horizontal == "left" else -1
+                    v = 1 if vertical == "top" else -1
+                    body += f'<path d="M{sx} {cy}A{r} {r} 0 0 {sweep} {cx} {sy}V{sy + v}A{r - 1} {r - 1} 0 0 {1 - sweep} {sx + h} {cy}Z" {s}/>'
             else:
                 body = f'<rect x="{x}" y="{y}" width="{m}" height="{m}" {f}/>'
                 if s:
                     if vertical in sides:
-                        ly = y + 0.5 if vertical == "top" else y + m - 0.5
-                        body += f'<path d="M{x} {ly}H{x + m}" {s} stroke-width="1"/>'
+                        ly = y if vertical == "top" else y + m - 1
+                        body += f'<rect x="{x}" y="{ly}" width="{m}" height="1" {s}/>'
                     if horizontal in sides:
-                        lx = x + 0.5 if horizontal == "left" else x + m - 0.5
-                        body += f'<path d="M{lx} {y}V{y + m}" {s} stroke-width="1"/>'
+                        lx = x if horizontal == "left" else x + m - 1
+                        body += f'<rect x="{lx}" y="{y}" width="1" height="{m}" {s}/>'
             self.group(name + c, x, y, m, m, body)
-        bx = x0 + 4 * (m + 2)
+        bx = x0 + 4 * (m + GAP)
         for i, side in enumerate(SIDES):
-            x, y = bx + i * (m + 2), y0
+            x, y = bx + i * (m + GAP), y0
             body = f'<rect x="{x}" y="{y}" width="{m}" height="{m}" {f}/>'
             if s and side in sides:
-                line = {
-                    "top": f"M{x} {y + 0.5}H{x + m}",
-                    "bottom": f"M{x} {y + m - 0.5}H{x + m}",
-                    "left": f"M{x + 0.5} {y}V{y + m}",
-                    "right": f"M{x + m - 0.5} {y}V{y + m}",
+                lx, ly, lw, lh = {
+                    "top": (x, y, m, 1),
+                    "bottom": (x, y + m - 1, m, 1),
+                    "left": (x, y, 1, m),
+                    "right": (x + m - 1, y, 1, m),
                 }[side]
-                body += f'<path d="{line}" {s} stroke-width="1"/>'
+                body += f'<rect x="{lx}" y="{ly}" width="{lw}" height="{lh}" {s}/>'
             self.group(name + side, x, y, m, m, body)
-        cx = bx + 4 * (m + 2)
+        cx = bx + 4 * (m + GAP)
         self.group(name + "center", cx, y0, m, m, f'<rect x="{cx}" y="{y0}" width="{m}" height="{m}" {f}/>')
-        hx = cx + m + 2
+        hx = cx + m + GAP
         for i, (side, size) in enumerate((hints or {}).items()):
             w, h = (size, 1) if side in ("left", "right") else (1, size)
             self.group(f"{name}hint-{side}-margin", hx + i * 40, y0, max(w, 1), max(h, 1))
-        self.y += m + 4
+        self.y += m + GAP
 
     def shadow(self, prefix, size, strength, inset=0):
         name = (prefix + "-") if prefix else ""
         y0 = self.y
         stops = [(0, strength), (0.35, strength * 0.45), (1, 0)]
         for i, c in enumerate(CORNERS):
-            x = i * (size + 2)
+            x = i * (size + GAP)
             cx = x + (size if "left" in c else 0)
             cy = y0 + (size if c.startswith("top") else 0)
             g = self.gradient(f"{name}sh-{c}", "radial", stops, cx=cx, cy=cy, r=size)
             self.group(f"{name}shadow-{c}", x, y0, size, size, f'<rect x="{x}" y="{y0}" width="{size}" height="{size}" fill="{g}"/>')
-        bx = 4 * (size + 2)
+        bx = 4 * (size + GAP)
         for i, side in enumerate(SIDES):
-            x = bx + i * (size + 2)
+            x = bx + i * (size + GAP)
             ends = {
                 "top": (x, y0 + size, x, y0),
                 "bottom": (x, y0, x, y0 + size),
@@ -114,8 +115,8 @@ class Sheet:
             g = self.gradient(f"{name}sh-{side}", "linear", stops, x1=ends[0], y1=ends[1], x2=ends[2], y2=ends[3])
             self.group(f"{name}shadow-{side}", x, y0, size, size, f'<rect x="{x}" y="{y0}" width="{size}" height="{size}" fill="{g}"/>')
         for i, side in enumerate(SIDES):
-            self.group(f"{name}shadow-hint-{side}-margin", bx + (4 + i) * (size + 2), y0, inset or 1, inset or 1)
-        self.y += size + 4
+            self.group(f"{name}shadow-hint-{side}-margin", bx + (4 + i) * (size + GAP), y0, inset or 1, inset or 1)
+        self.y += size + GAP
 
     def raw(self, name, x, y, w, h, body):
         self.group(name, x, y, w, h, body)
@@ -227,25 +228,25 @@ def aurorae(root):
         size = pad + r
         stops = [(0, strength), (r / size, strength), (r / size + 0.25 * (1 - r / size), strength * 0.35), (1, 0)]
         for i, c in enumerate(CORNERS):
-            x = i * (size + 2)
+            x = i * (size + GAP)
             cx = x + (size if "left" in c else 0)
             cy = y0 + (size if c.startswith("top") else 0)
             g = s.gradient(f"{prefix}-g-{c}", "radial", stops, cx=cx, cy=cy, r=size)
             sx = cx - r if "left" in c else cx + r
             sy = cy - r if c.startswith("top") else cy + r
             sweep = 1 if ("left" in c) == c.startswith("top") else 0
-            h = 0.5 if "left" in c else -0.5
-            v = 0.5 if c.startswith("top") else -0.5
+            h = 1 if "left" in c else -1
+            v = 1 if c.startswith("top") else -1
             body = (
                 f'<rect x="{x}" y="{y0}" width="{size}" height="{size}" fill="{g}"/>'
                 f'<path d="M{cx} {cy}L{sx} {cy}A{r} {r} 0 0 {sweep} {cx} {sy}Z" fill="{SURFACE}"/>'
-                f'<path d="M{sx + h} {cy}A{r - 0.5} {r - 0.5} 0 0 {sweep} {cx} {sy + v}" fill="none" stroke="rgb(46,42,38)" stroke-opacity="0.12"/>'
+                f'<path d="M{sx} {cy}A{r} {r} 0 0 {sweep} {cx} {sy}V{sy + v}A{r - 1} {r - 1} 0 0 {1 - sweep} {sx + h} {cy}Z" {paint(LINE, "fill")}/>'
             )
             s.group(f"{prefix}-{c}", x, y0, size, size, body)
-        bx = 4 * (size + 2)
+        bx = 4 * (size + GAP)
         edge = [(0, 0), (1 - r / size - 0.25 * (1 - r / size), strength * 0.35), (1 - r / size, strength)]
         for i, side in enumerate(SIDES):
-            x = bx + i * (size + 2)
+            x = bx + i * (size + GAP)
             ends = {
                 "top": (x, y0, x, y0 + pad),
                 "bottom": (x, y0 + size, x, y0 + r),
@@ -254,20 +255,20 @@ def aurorae(root):
             }[side]
             g = s.gradient(f"{prefix}-g-{side}", "linear", [(0, 0), (0.75, strength * 0.35), (1, strength)], x1=ends[0], y1=ends[1], x2=ends[2], y2=ends[3])
             card = {
-                "top": (x, y0 + pad, size, r, f"M{x} {y0 + pad + 0.5}H{x + size}"),
-                "bottom": (x, y0, size, r, f"M{x} {y0 + r - 0.5}H{x + size}"),
-                "left": (x + pad, y0, r, size, f"M{x + pad + 0.5} {y0}V{y0 + size}"),
-                "right": (x, y0, r, size, f"M{x + r - 0.5} {y0}V{y0 + size}"),
+                "top": (x, y0 + pad, size, r, (x, y0 + pad, size, 1)),
+                "bottom": (x, y0, size, r, (x, y0 + r - 1, size, 1)),
+                "left": (x + pad, y0, r, size, (x + pad, y0, 1, size)),
+                "right": (x, y0, r, size, (x + r - 1, y0, 1, size)),
             }[side]
             body = (
                 f'<rect x="{x}" y="{y0}" width="{size}" height="{size}" fill="{g}"/>'
                 f'<rect x="{card[0]}" y="{card[1]}" width="{card[2]}" height="{card[3]}" fill="{SURFACE}"/>'
-                f'<path d="{card[4]}" stroke="rgb(46,42,38)" stroke-opacity="0.12"/>'
+                f'<rect x="{card[4][0]}" y="{card[4][1]}" width="{card[4][2]}" height="{card[4][3]}" {paint(LINE, "fill")}/>'
             )
             s.group(f"{prefix}-{side}", x, y0, size, size, body)
-        cx = bx + 4 * (size + 2)
+        cx = bx + 4 * (size + GAP)
         s.group(f"{prefix}-center", cx, y0, size, size, f'<rect x="{cx}" y="{y0}" width="{size}" height="{size}" fill="{SURFACE}"/>')
-        s.y += size + 4
+        s.y += size + GAP
     for prefix in ("decoration-maximized", "decoration-maximized-inactive"):
         s.frame(prefix, 0, SURFACE, edge=4)
     s.write(f"{base}/decoration.svg")
