@@ -25,7 +25,7 @@ PlasmoidItem {
         verticalAlignment: Text.AlignVCenter
         text: Qt.formatDateTime(root.now, "ddd h:mm AP")
         color: Kirigami.Theme.textColor
-        font.pixelSize: 13
+        font.pixelSize: 15
         font.weight: Font.Medium
         font.features: { "tnum": 1 }
     }

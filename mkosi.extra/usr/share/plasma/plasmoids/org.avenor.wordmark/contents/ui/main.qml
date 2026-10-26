@@ -32,7 +32,7 @@ PlasmoidItem {
                 text: "Avenor"
                 color: Kirigami.Theme.textColor
                 opacity: parent.parent.containsMouse ? 0.7 : 1
-                font.pixelSize: 14
+                font.pixelSize: 16
                 font.weight: Font.Medium
             }
 

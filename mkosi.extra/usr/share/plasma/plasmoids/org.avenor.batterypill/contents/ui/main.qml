@@ -41,7 +41,7 @@ PlasmoidItem {
                 anchors.centerIn: parent
                 text: root.percent
                 color: root.percent <= 10 && !root.charging ? "#c2410c" : "#1f1d1a"
-                font.pixelSize: 12
+                font.pixelSize: 14
                 font.weight: Font.DemiBold
                 font.features: { "tnum": 1 }
             }
