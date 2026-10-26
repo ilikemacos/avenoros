@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Layouts
 import org.kde.plasma.plasmoid
 import org.kde.plasma.plasma5support as P5Support
 import org.kde.kirigami as Kirigami
@@ -16,7 +17,8 @@ PlasmoidItem {
     }
 
     fullRepresentation: MouseArea {
-        implicitWidth: row.implicitWidth + Kirigami.Units.smallSpacing * 2
+        Layout.minimumWidth: row.implicitWidth + Kirigami.Units.largeSpacing * 2
+        Layout.fillHeight: true
         hoverEnabled: true
         onClicked: shell.connectSource("krunner")
 

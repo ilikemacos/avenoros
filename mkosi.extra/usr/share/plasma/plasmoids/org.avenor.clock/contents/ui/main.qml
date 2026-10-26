@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Layouts
 import org.kde.plasma.plasmoid
 import org.kde.kirigami as Kirigami
 
@@ -18,7 +19,8 @@ PlasmoidItem {
     }
 
     fullRepresentation: Text {
-        implicitWidth: contentWidth + Kirigami.Units.smallSpacing * 2
+        Layout.minimumWidth: contentWidth + Kirigami.Units.largeSpacing * 2
+        Layout.fillHeight: true
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         text: Qt.formatDateTime(root.now, "ddd h:mm AP")

@@ -8,7 +8,7 @@ for (const desktop of desktops()) {
 
 const bar = new Panel
 bar.location = "top"
-bar.height = 2 * Math.round(gridUnit * 0.9)
+bar.height = 2 * Math.round(gridUnit * 1.1)
 bar.floating = true
 bar.lengthMode = "fill"
 bar.hiding = "none"
@@ -22,7 +22,7 @@ bar.addWidget("org.avenor.batterypill")
 
 const dock = new Panel
 dock.location = "bottom"
-dock.height = 2 * Math.round(gridUnit * 1.4)
+dock.height = 2 * Math.round(gridUnit * 1.8)
 dock.floating = true
 dock.lengthMode = "fit"
 dock.alignment = "center"
