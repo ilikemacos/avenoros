@@ -10,6 +10,7 @@ fixed=Noto Sans Mono,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 activeFont=Inter,10,-1,5,500,0,0,0,0,0,0,0,0,0,0,1
 
 [KDE]
+widgetStyle=kvantum
 AnimationDurationFactor=0.5
 LookAndFeelPackage=org.avenor.desktop
 
