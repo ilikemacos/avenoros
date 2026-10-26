@@ -7,9 +7,9 @@ slidingpopupsEnabled=false
 InputMethod=
 
 [org.kde.kdecoration2]
-library=org.kde.breeze
-theme=Breeze
+library=org.kde.kwin.aurorae
+theme=__aurorae__svg__Avenor
 ButtonsOnLeft=
 ButtonsOnRight=IAX
-BorderSize=None
+BorderSize=Normal
 BorderSizeAuto=false
