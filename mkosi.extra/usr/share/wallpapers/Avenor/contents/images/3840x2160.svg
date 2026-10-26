@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3840" height="2160" viewBox="0 0 3840 2160">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#efe6df"/>
+      <stop offset="0.45" stop-color="#f3dccb"/>
+      <stop offset="1" stop-color="#e9cdb8"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0.62" cy="0.38" r="0.5">
+      <stop offset="0" stop-color="#fff4e8" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#fff4e8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="far" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e8c9b4"/>
+      <stop offset="1" stop-color="#dcb9a6"/>
+    </linearGradient>
+    <linearGradient id="mid" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e6c2aa"/>
+      <stop offset="0.55" stop-color="#d9b3a3"/>
+      <stop offset="1" stop-color="#c9a9a8"/>
+    </linearGradient>
+    <linearGradient id="near" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c4adb3"/>
+      <stop offset="0.5" stop-color="#e2c4b0"/>
+      <stop offset="1" stop-color="#b9a3b0"/>
+    </linearGradient>
+    <linearGradient id="front" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#b8a2b2"/>
+      <stop offset="0.45" stop-color="#ead2c0"/>
+      <stop offset="1" stop-color="#ad9aae"/>
+    </linearGradient>
+  </defs>
+  <rect width="3840" height="2160" fill="url(#sky)"/>
+  <rect width="3840" height="2160" fill="url(#sun)"/>
+  <path d="M0 980 C520 820 900 840 1300 960 S2300 1060 2800 900 S3500 860 3840 940 V2160 H0Z" fill="url(#far)"/>
+  <path d="M0 1240 C600 1020 1100 980 1500 1160 S2500 1320 3000 1080 S3600 1000 3840 1060 V2160 H0Z" fill="url(#mid)"/>
+  <path d="M0 1500 C500 1300 1000 1260 1600 1480 S2700 1700 3200 1420 S3700 1340 3840 1380 V2160 H0Z" fill="url(#near)"/>
+  <path d="M0 1800 C700 1640 1300 1700 1900 1860 S3000 1960 3840 1700 V2160 H0Z" fill="url(#front)"/>
+</svg>
