@@ -12,3 +12,6 @@ activeFont=Inter,10,-1,5,500,0,0,0,0,0,0,0,0,0,0,1
 [KDE]
 AnimationDurationFactor=0.5
 LookAndFeelPackage=org.avenor.desktop
+
+[Icons]
+Theme=Avenor

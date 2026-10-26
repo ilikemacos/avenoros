@@ -1,9 +1,12 @@
 [Common]
-OutlineIntensity=OutlineOff
-ShadowSize=ShadowMedium
-ShadowStrength=90
+OutlineIntensity=OutlineLow
+RoundedCorners=true
+ShadowSize=ShadowLarge
+ShadowStrength=70
+ShadowColor=46,42,38
 
 [Windeco]
 DrawBackgroundGradient=false
 DrawBorderOnMaximizedWindows=false
-TitleAlignment=AlignLeft
+DrawTitleBarSeparator=false
+TitleAlignment=AlignCenterFullWidth

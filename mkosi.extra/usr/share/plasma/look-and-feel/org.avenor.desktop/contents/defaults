@@ -2,7 +2,7 @@
 ColorScheme=Avenor
 
 [kdeglobals][Icons]
-Theme=breeze
+Theme=Avenor
 
 [kdeglobals][KDE]
 widgetStyle=Breeze
@@ -16,3 +16,7 @@ theme=Breeze
 
 [Wallpaper]
 Image=Avenor
+
+[ksplashrc][KSplash]
+Engine=KSplashQML
+Theme=org.avenor.desktop

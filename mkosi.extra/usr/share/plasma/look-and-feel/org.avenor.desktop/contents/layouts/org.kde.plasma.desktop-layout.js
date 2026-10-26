@@ -1,4 +1,4 @@
-const wallpaper = "file:///usr/share/wallpapers/Avenor/contents/images/3840x2160.svg"
+const wallpaper = "file:///usr/share/wallpapers/Avenor/contents/images/1672x941.png"
 
 for (const desktop of desktops()) {
     desktop.wallpaperPlugin = "org.kde.image"
@@ -12,6 +12,7 @@ bar.height = 2 * Math.round(gridUnit * 1.1)
 bar.floating = true
 bar.lengthMode = "fill"
 bar.hiding = "none"
+bar.opacity = "translucent"
 
 bar.addWidget("org.avenor.wordmark")
 bar.addWidget("org.kde.plasma.panelspacer")
@@ -27,10 +28,11 @@ dock.floating = true
 dock.lengthMode = "fit"
 dock.alignment = "center"
 dock.hiding = "none"
+dock.opacity = "translucent"
 
 const launcher = dock.addWidget("org.kde.plasma.kickoff")
 launcher.currentConfigGroup = ["General"]
-launcher.writeConfig("icon", "view-app-grid-symbolic")
+launcher.writeConfig("icon", "avenor")
 
 const tasks = dock.addWidget("org.kde.plasma.icontasks")
 tasks.currentConfigGroup = ["General"]
