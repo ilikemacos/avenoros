@@ -295,8 +295,8 @@ def kvantum(root):
     states("itemview", 8, {
         "normal": ("rgba(0,0,0,0)", None),
         "focused": ("rgba(46,42,38,0.05)", None),
-        "pressed": ("rgba(96,114,150,0.16)", None),
-        "toggled": ("rgba(96,114,150,0.16)", None),
+        "pressed": ("rgba(96,114,150,0.92)", None),
+        "toggled": ("rgba(96,114,150,0.92)", None),
     })
     states("tab", 8, {
         "normal": ("rgba(0,0,0,0)", None),

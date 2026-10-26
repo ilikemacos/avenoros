@@ -178,8 +178,8 @@ frame.element=itemview
 interior.element=itemview
 text.margin.left=6
 text.margin.right=6
-text.toggle.color=#2e2a26
-text.press.color=#2e2a26
+text.toggle.color=#ffffff
+text.press.color=#ffffff
 
 [HeaderSection]
 inherits=PanelButtonCommand
