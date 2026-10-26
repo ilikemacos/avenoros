@@ -1,0 +1,19 @@
+[Icon Theme]
+Name=Avenor
+Comment=Quiet monochrome overrides on top of Breeze
+Inherits=breeze,hicolor
+Directories=scalable/apps,scalable/places
+
+[scalable/apps]
+Size=48
+MinSize=16
+MaxSize=512
+Type=Scalable
+Context=Applications
+
+[scalable/places]
+Size=48
+MinSize=16
+MaxSize=512
+Type=Scalable
+Context=Places
