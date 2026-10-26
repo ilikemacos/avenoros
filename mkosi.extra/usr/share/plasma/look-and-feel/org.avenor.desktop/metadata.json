@@ -1,0 +1,12 @@
+{
+    "KPackageStructure": "Plasma/LookAndFeel",
+    "KPlugin": {
+        "Authors": [{ "Name": "AvenorOS" }],
+        "Description": "Floating top bar and a small centred dock",
+        "Id": "org.avenor.desktop",
+        "License": "GPL-3.0-or-later",
+        "Name": "Avenor",
+        "Version": "0.1.0"
+    },
+    "X-Plasma-APIVersion": "2"
+}
