@@ -5,14 +5,14 @@ ColorScheme=Avenor
 Theme=Avenor
 
 [kdeglobals][KDE]
-widgetStyle=Breeze
+widgetStyle=kvantum
 
 [plasmarc][Theme]
-name=default
+name=org.avenor.desktop
 
 [kwinrc][org.kde.kdecoration2]
-library=org.kde.breeze
-theme=Breeze
+library=org.kde.kwin.aurorae
+theme=__aurorae__svg__Avenor
 
 [Wallpaper]
 Image=Avenor
