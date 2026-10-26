@@ -22,7 +22,8 @@ def paint(value, kind):
 
 
 class Sheet:
-    def __init__(self):
+    def __init__(self, interior="center"):
+        self.interior = interior
         self.parts = []
         self.defs = []
         self.y = 0
@@ -86,7 +87,7 @@ class Sheet:
                 body += f'<rect x="{lx}" y="{ly}" width="{lw}" height="{lh}" {s}/>'
             self.group(name + side, x, y, m, m, body)
         cx = bx + 4 * (m + GAP)
-        self.group(name + "center", cx, y0, m, m, f'<rect x="{cx}" y="{y0}" width="{m}" height="{m}" {f}/>')
+        self.group(name + self.interior if self.interior else name.rstrip("-"), cx, y0, m, m, f'<rect x="{cx}" y="{y0}" width="{m}" height="{m}" {f}/>')
         hx = cx + m + GAP
         for i, (side, size) in enumerate((hints or {}).items()):
             w, h = (size, 1) if side in ("left", "right") else (1, size)
@@ -221,54 +222,9 @@ def glyph(kind, x, y):
 
 def aurorae(root):
     base = os.path.join(root, "usr/share/aurorae/themes/Avenor")
-    pad, r = 22, 10
     s = Sheet()
-    for prefix, strength in (("decoration", 0.20), ("decoration-inactive", 0.10)):
-        y0 = s.y
-        size = pad + r
-        stops = [(0, strength), (r / size, strength), (r / size + 0.25 * (1 - r / size), strength * 0.35), (1, 0)]
-        for i, c in enumerate(CORNERS):
-            x = i * (size + GAP)
-            cx = x + (size if "left" in c else 0)
-            cy = y0 + (size if c.startswith("top") else 0)
-            g = s.gradient(f"{prefix}-g-{c}", "radial", stops, cx=cx, cy=cy, r=size)
-            sx = cx - r if "left" in c else cx + r
-            sy = cy - r if c.startswith("top") else cy + r
-            sweep = 1 if ("left" in c) == c.startswith("top") else 0
-            h = 1 if "left" in c else -1
-            v = 1 if c.startswith("top") else -1
-            body = (
-                f'<rect x="{x}" y="{y0}" width="{size}" height="{size}" fill="{g}"/>'
-                f'<path d="M{cx} {cy}L{sx} {cy}A{r} {r} 0 0 {sweep} {cx} {sy}Z" fill="{SURFACE}"/>'
-                f'<path d="M{sx} {cy}A{r} {r} 0 0 {sweep} {cx} {sy}V{sy + v}A{r - 1} {r - 1} 0 0 {1 - sweep} {sx + h} {cy}Z" {paint(LINE, "fill")}/>'
-            )
-            s.group(f"{prefix}-{c}", x, y0, size, size, body)
-        bx = 4 * (size + GAP)
-        edge = [(0, 0), (1 - r / size - 0.25 * (1 - r / size), strength * 0.35), (1 - r / size, strength)]
-        for i, side in enumerate(SIDES):
-            x = bx + i * (size + GAP)
-            ends = {
-                "top": (x, y0, x, y0 + pad),
-                "bottom": (x, y0 + size, x, y0 + r),
-                "left": (x, y0, x + pad, y0),
-                "right": (x + size, y0, x + r, y0),
-            }[side]
-            g = s.gradient(f"{prefix}-g-{side}", "linear", [(0, 0), (0.75, strength * 0.35), (1, strength)], x1=ends[0], y1=ends[1], x2=ends[2], y2=ends[3])
-            card = {
-                "top": (x, y0 + pad, size, r, (x, y0 + pad, size, 1)),
-                "bottom": (x, y0, size, r, (x, y0 + r - 1, size, 1)),
-                "left": (x + pad, y0, r, size, (x + pad, y0, 1, size)),
-                "right": (x, y0, r, size, (x + r - 1, y0, 1, size)),
-            }[side]
-            body = (
-                f'<rect x="{x}" y="{y0}" width="{size}" height="{size}" fill="{g}"/>'
-                f'<rect x="{card[0]}" y="{card[1]}" width="{card[2]}" height="{card[3]}" fill="{SURFACE}"/>'
-                f'<rect x="{card[4][0]}" y="{card[4][1]}" width="{card[4][2]}" height="{card[4][3]}" {paint(LINE, "fill")}/>'
-            )
-            s.group(f"{prefix}-{side}", x, y0, size, size, body)
-        cx = bx + 4 * (size + GAP)
-        s.group(f"{prefix}-center", cx, y0, size, size, f'<rect x="{cx}" y="{y0}" width="{size}" height="{size}" fill="{SURFACE}"/>')
-        s.y += size + GAP
+    s.frame("decoration", 10, SURFACE, LINE)
+    s.frame("decoration-inactive", 10, SURFACE, "rgba(46,42,38,0.08)")
     for prefix in ("decoration-maximized", "decoration-maximized-inactive"):
         s.frame(prefix, 0, SURFACE, edge=4)
     s.write(f"{base}/decoration.svg")
@@ -284,17 +240,17 @@ def aurorae(root):
         }
         for i, (state, (radius, alpha, mark)) in enumerate(states.items()):
             x = i * 20
-            body = f'<circle cx="{x + 8}" cy="8" r="{radius}" fill="rgb(46,42,38)" fill-opacity="{alpha}"/>'
+            body = f'<rect x="{x}" y="0" width="16" height="16" fill="none"/><circle cx="{x + 8}" cy="8" r="{radius}" fill="rgb(46,42,38)" fill-opacity="{alpha}"/>'
             if mark:
                 body += glyph(kind, x, 0)
-            b.raw(state, x, 0, 16, 16, body)
+            b.raw(f"{state}-center", x, 0, 16, 16, body)
         b.y = 18
         b.write(f"{base}/{kind}.svg")
 
 
 def kvantum(root):
     base = os.path.join(root, "usr/share/Kvantum/Avenor")
-    s = Sheet()
+    s = Sheet(interior="")
 
     def states(element, r, table):
         for state, (fill, stroke) in table.items():

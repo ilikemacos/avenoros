@@ -4,7 +4,7 @@ InactiveTextColor=128,120,112,255
 TitleAlignment=Center
 TitleVerticalAlignment=Center
 Animation=120
-Shadow=true
+Shadow=false
 DecorationPosition=0
 
 [Layout]
@@ -23,10 +23,10 @@ ButtonHeight=16
 ButtonSpacing=8
 ButtonMarginTop=2
 ExplicitButtonSpacer=8
-PaddingTop=22
-PaddingBottom=22
-PaddingLeft=22
-PaddingRight=22
+PaddingTop=0
+PaddingBottom=0
+PaddingLeft=0
+PaddingRight=0
 BorderLeftMaximized=0
 BorderRightMaximized=0
 BorderBottomMaximized=0
