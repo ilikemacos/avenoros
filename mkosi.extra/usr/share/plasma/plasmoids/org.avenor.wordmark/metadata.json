@@ -1,0 +1,14 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [{ "Name": "AvenorOS" }],
+        "Category": "Application Launchers",
+        "Description": "Avenor name that opens search",
+        "Icon": "search",
+        "Id": "org.avenor.wordmark",
+        "License": "GPL-3.0-or-later",
+        "Name": "Avenor Wordmark",
+        "Version": "0.1.0"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
+}
