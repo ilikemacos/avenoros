@@ -1,0 +1,12 @@
+{
+    "KPackageStructure": "Plasma/Theme",
+    "KPlugin": {
+        "Authors": [{ "Name": "AvenorOS" }],
+        "Description": "Warm, quiet surfaces for AvenorOS",
+        "Id": "org.avenor.desktop",
+        "License": "GPL-3.0-or-later",
+        "Name": "Avenor",
+        "Version": "0.3.0"
+    },
+    "X-Plasma-API": "5.0"
+}
