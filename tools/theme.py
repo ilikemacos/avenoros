@@ -135,21 +135,24 @@ class Sheet:
 def plasma(root):
     base = os.path.join(root, "usr/share/plasma/desktoptheme/org.avenor.desktop")
 
-    s = Sheet()
-    for prefix in ("", "north", "south", "east", "west", "floating"):
-        s.frame(prefix, 14, "rgba(250,248,245,0.84)", LINE, hints={"top": 3, "bottom": 3, "left": 12, "right": 12})
-        s.shadow(prefix, 18, 0.16)
-    s.write(f"{base}/widgets/panel-background.svg", ["hint-stretch-borders"])
+    def card(r, fill, hints, shadow, strength):
+        s = Sheet()
+        s.frame("", r, fill, LINE, hints=hints)
+        s.frame("mask", r, SURFACE)
+        s.shadow("", shadow, strength)
+        return s
 
-    s = Sheet()
-    s.frame("", 16, SURFACE, LINE, hints={"top": 12, "bottom": 12, "left": 12, "right": 12})
-    s.shadow("", 28, 0.18)
-    s.write(f"{base}/dialogs/background.svg", ["hint-stretch-borders"])
-
-    s = Sheet()
-    s.frame("", 10, SURFACE, LINE, hints={"top": 6, "bottom": 6, "left": 10, "right": 10})
-    s.shadow("", 14, 0.14)
-    s.write(f"{base}/widgets/tooltip.svg", ["hint-stretch-borders"])
+    pad = {"top": 3, "bottom": 3, "left": 12, "right": 12}
+    for folder, alpha in (("", 0.86), ("translucent/", 0.86), ("solid/", 1)):
+        card(14, f"rgba(250,248,245,{alpha})", pad, 18, 0.16).write(
+            f"{base}/{folder}widgets/panel-background.svg", ["hint-stretch-borders"]
+        )
+        card(16, SURFACE, {"top": 12, "bottom": 12, "left": 12, "right": 12}, 28, 0.18).write(
+            f"{base}/{folder}dialogs/background.svg", ["hint-stretch-borders"]
+        )
+        card(10, SURFACE, {"top": 6, "bottom": 6, "left": 10, "right": 10}, 14, 0.14).write(
+            f"{base}/{folder}widgets/tooltip.svg", ["hint-stretch-borders"]
+        )
 
     s = Sheet()
     s.frame("", 16, SURFACE, LINE)
