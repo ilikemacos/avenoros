@@ -6,3 +6,5 @@ for d in /sys/class/drm/card*/device/driver; do
 	esac
 done
 echo QT_QUICK_BACKEND=software
+echo LP_NUM_THREADS=1
+echo MALLOC_ARENA_MAX=2
