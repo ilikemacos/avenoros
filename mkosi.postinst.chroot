@@ -6,5 +6,6 @@ passwd -d avenor
 echo '%wheel ALL=(ALL:ALL) ALL' > /etc/sudoers.d/wheel
 ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 systemctl set-default graphical.target
+rm -rf /usr/lib/firmware/{bnx2,bnx2x,intel/qat,mediatek/mt7996,mrvl/prestera}
 sed -i -e '/^LOGO=/d' -e '/^PRETTY_NAME=/d' -e '/^NAME=/d' -e '/^HOME_URL=/d' /usr/lib/os-release
 printf 'NAME="AvenorOS"\nPRETTY_NAME="AvenorOS 0.3.2"\nLOGO=avenor\nHOME_URL="https://github.com/ilikemacos/avenoros"\n' >> /usr/lib/os-release
