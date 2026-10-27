@@ -4,6 +4,7 @@ set -euo pipefail
 useradd -m -G wheel -s /bin/bash avenor
 passwd -d avenor
 echo '%wheel ALL=(ALL:ALL) ALL' > /etc/sudoers.d/wheel
+ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 systemctl set-default graphical.target
 sed -i -e '/^LOGO=/d' -e '/^PRETTY_NAME=/d' -e '/^NAME=/d' -e '/^HOME_URL=/d' /usr/lib/os-release
 printf 'NAME="AvenorOS"\nPRETTY_NAME="AvenorOS 0.3.0"\nLOGO=avenor\nHOME_URL="https://github.com/ilikemacos/avenoros"\n' >> /usr/lib/os-release
