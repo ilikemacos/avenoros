@@ -4,16 +4,25 @@ autoload=false
 [Module-baloosearchmodule]
 autoload=false
 
+[Module-desktopnotifier]
+autoload=false
+
 [Module-donationmessage]
 autoload=false
 
 [Module-filenamesearchmodule]
 autoload=false
 
+[Module-freespacenotifier]
+autoload=false
+
 [Module-geotimezoned]
 autoload=false
 
 [Module-lookandfeelautoswitcher]
+autoload=false
+
+[Module-oom_notifier]
 autoload=false
 
 [Module-plasma_accentcolor_service]
@@ -30,4 +39,3 @@ autoload=false
 
 [Module-wpad_detector]
 autoload=false
-
