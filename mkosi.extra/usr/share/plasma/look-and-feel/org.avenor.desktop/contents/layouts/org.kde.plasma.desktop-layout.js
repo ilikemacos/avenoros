@@ -37,6 +37,7 @@ launcher.writeConfig("icon", "avenor")
 const tasks = dock.addWidget("org.kde.plasma.icontasks")
 tasks.currentConfigGroup = ["General"]
 tasks.writeConfig("launchers", [
+    "applications:chromium.desktop",
     "applications:org.kde.dolphin.desktop",
     "applications:org.kde.konsole.desktop",
     "applications:systemsettings.desktop"
