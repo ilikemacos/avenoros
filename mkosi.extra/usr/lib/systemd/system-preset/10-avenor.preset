@@ -1,5 +1,6 @@
 enable sddm.service
 enable NetworkManager.service
+enable bluetooth.service
 enable qemu-guest-agent.service
 enable systemd-repart.service
 enable avenor-health.service
