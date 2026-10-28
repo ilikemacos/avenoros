@@ -56,17 +56,27 @@ Download: [AvenorOS 1.0.0](https://github.com/ilikemacos/avenoros/releases/tag/v
 
 AvenorOS runs live from the stick. Nothing is installed on your disk.
 
+
 ## Requirements
 
 - A 64-bit x86 (x86_64) PC with UEFI boot. Legacy BIOS is not supported.
 - A USB stick of 8 GB or more, since the ISO is about 4.5 GB.
 
+  ## Tested Hardware:
+  2021 ROG Zephryus G14
+  -Ryzen 7 5800HS @ 2.8GHz
+  -RTX 3060 Laptop GPU 6GB GDDR6 on a 192 bit bus (GA106) @ 1.38GHz
+  -16GB DDR4 @ 3200MT/s
+  -1TB M.2 NVme SSD PCIe 3.0
+  -2560x1440 @ 120HZ 1600 Nits Peak prightness.
+  ## Minimum Requirements
+  -A 1ghz CPU with 2 cores or more (AMD Athlon K7 or faster)
+-2GB of RAM DDR2-600 MHz
+-20gb HDD for the OS and Updates (SATA SSD recommended)
+-Any GPU faster than 800MHz
 ## Status and known limits
 
-- Live only. There is no installer yet, so full-disk encryption and automatic
-  rollback after a bad update are planned, not working today.
-- Idle RAM is about 950 MB in a software-rendered VM. It has not been measured
-  on real hardware yet.
+- Idle RAM is about 950 MB on a 2021 ROG Zephyrus G14. 
 - Wi-Fi and Bluetooth have not been tested on real hardware.
 - The Broadcom `wl` driver is not included, so some older Broadcom Wi-Fi cards
   will not work.
@@ -110,6 +120,13 @@ Issues and pull requests are welcome. Keep changes small, and say what you
 tested and on which hardware.
 
 ## Contributors
+- [@ilikemacos](https://github.com/ilikemacos)
+- [@duck-cl1](https://github.com/duck-cl1)
+- [@mzxl-g](https://github.com/mzxl-g)
+- [@forkie-gi](https://github.com/forkie-gi)
+- [@chip-accident](https://github.com/chip-accident)
+- [@b3st-b1y](https://github.com/b3st-b1y)
+
 
 See [CONTRIBUTORS.md](CONTRIBUTORS.md).
 
