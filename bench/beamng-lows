@@ -1,0 +1,45 @@
+#!/usr/bin/env python3
+import csv
+import sys
+
+
+def frametimes(path):
+    with open(path, newline="", encoding="utf-8-sig") as f:
+        rows = list(csv.reader(f))
+    for i, row in enumerate(rows):
+        cols = [c.strip() for c in row]
+        for name in ("frametime", "MsBetweenPresents", "FrameTime", "msBetweenPresents"):
+            if name in cols:
+                k = cols.index(name)
+                out = []
+                for r in rows[i + 1:]:
+                    try:
+                        v = float(r[k])
+                    except (IndexError, ValueError):
+                        continue
+                    if v > 0:
+                        out.append(v)
+                return out
+    sys.exit(f"{path}: no frametime column found")
+
+
+def lows(ms, share):
+    worst = sorted(ms, reverse=True)
+    n = max(1, int(len(worst) * share))
+    return 1000 * n / sum(worst[:n])
+
+
+def report(path):
+    ms = frametimes(path)
+    if len(ms) < 1000:
+        sys.exit(f"{path}: only {len(ms)} frames, run longer")
+    avg = 1000 * len(ms) / sum(ms)
+    print(f"{path}\n  frames   {len(ms)}\n  seconds  {sum(ms) / 1000:.1f}\n  avg fps  {avg:.1f}\n  1% low   {lows(ms, 0.01):.1f}\n  0.1% low {lows(ms, 0.001):.1f}")
+    return lows(ms, 0.01)
+
+
+if len(sys.argv) < 2:
+    sys.exit("usage: beamng-lows run.csv [other.csv]")
+results = [report(p) for p in sys.argv[1:3]]
+if len(results) == 2:
+    print(f"1% low change, second vs first: {100 * (results[1] / results[0] - 1):+.1f}%")

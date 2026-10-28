@@ -1,0 +1,11 @@
+[Unit]
+Description=AvenorOS sched_ext scheduler (scx_lavd)
+ConditionPathExists=/sys/kernel/sched_ext
+
+[Service]
+ExecStart=/usr/bin/scx_lavd
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target
