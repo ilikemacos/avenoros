@@ -1,0 +1,17 @@
+[Unit]
+Description=Writable overlay for the live root
+DefaultDependencies=no
+After=sysroot.mount
+Requires=sysroot.mount
+Before=initrd-root-fs.target sysroot-usr.mount
+ConditionPathIsReadWrite=!/sysroot
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/mkdir -p /run/avenor/lower /run/avenor/rw
+ExecStart=/usr/bin/mount --bind -o ro /sysroot /run/avenor/lower
+ExecStart=/usr/bin/mount -t tmpfs -o mode=0755 tmpfs /run/avenor/rw
+ExecStart=/usr/bin/mkdir /run/avenor/rw/upper /run/avenor/rw/work
+ExecStart=/usr/bin/mount -t overlay overlay -o lowerdir=/run/avenor/lower,upperdir=/run/avenor/rw/upper,workdir=/run/avenor/rw/work /sysroot
+ExecStart=/usr/bin/mkdir -p /sysroot/boot
