@@ -83,6 +83,10 @@ AvenorOS runs live from the stick. Nothing is installed on your disk.
 - The 1.0.0 release is the 0.3.2 build, so the version shown inside the
   image says 0.3.2.
 
+## Gaming
+
+In one test on an ASUS ROG G14 running BeamNG.drive at 1080p High on the Radeon integrated GPU, the 1% low was 27 fps on AvenorOS 1.1.0 gaming test 1, against 12 fps on Windows 11. That is one run on one machine, not a promise for every PC. See [bench/README.md](bench/README.md) to run the same test.
+
 ## Build from source
 
 You need an Arch-based host with `mkosi`, plus `xorriso`, `mtools`,
