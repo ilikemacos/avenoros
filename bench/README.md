@@ -14,7 +14,7 @@ Both runs are read by the same script, `bench/beamng-lows`, so both numbers mean
 1. In Steam, turn on Steam Play for all titles, then set BeamNG.drive to the same Proton version every time.
 2. Set these launch options:
 
-       MANGOHUD_CONFIG=no_display,output_folder=$HOME/bench,log_duration=120,autostart_log=15 prime-run gamemoderun mangohud %command%
+       MANGOHUD_CONFIG=no_display,output_folder=$HOME/bench,log_duration=120,autostart_log=15 gamemoderun mangohud %command%
 
 3. Start the game and the replay. Logging starts 15 seconds after launch, so start the replay before that.
 4. Run `bench/beamng-lows ~/bench/<file>.csv`.
