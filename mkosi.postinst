@@ -1,0 +1,4 @@
+#!/bin/bash
+set -euo pipefail
+
+install -Dm644 "$SRCDIR/mkosi.crt" "$BUILDROOT/usr/lib/verity.d/avenoros.crt"

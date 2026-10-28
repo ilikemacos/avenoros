@@ -1,0 +1,9 @@
+[Daemon]
+Autolock=false
+
+[Greeter]
+WallpaperPlugin=org.kde.image
+
+[Greeter][Wallpaper][org.kde.image][General]
+Image=file:///usr/share/wallpapers/Avenor/contents/images/1672x941.png
+PreviewImage=file:///usr/share/wallpapers/Avenor/contents/images/1672x941.png

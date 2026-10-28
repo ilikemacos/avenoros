@@ -1,0 +1,17 @@
+[Transfer]
+ProtectVersion=%A
+
+[Source]
+Type=url-file
+Path=https://updates.avenoros.org/x86-64/
+MatchPattern=avenoros_@v.efi
+
+[Target]
+Type=regular-file
+Path=/EFI/Linux
+PathRelativeTo=boot
+MatchPattern=avenoros_@v+@l-@d.efi avenoros_@v+@l.efi avenoros_@v.efi
+Mode=0444
+TriesLeft=3
+TriesDone=0
+InstancesMax=2

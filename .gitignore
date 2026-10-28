@@ -1,0 +1,7 @@
+mkosi.output/
+mkosi.cache/
+mkosi.tools/
+mkosi.key
+mkosi.crt
+mkosi.local.conf
+build/

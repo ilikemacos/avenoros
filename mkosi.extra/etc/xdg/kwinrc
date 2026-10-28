@@ -1,0 +1,15 @@
+[Plugins]
+blurEnabled=false
+contrastEnabled=false
+slidingpopupsEnabled=false
+
+[Wayland]
+InputMethod=
+
+[org.kde.kdecoration2]
+library=org.kde.kwin.aurorae
+theme=__aurorae__svg__Avenor
+ButtonsOnLeft=
+ButtonsOnRight=IAX
+BorderSize=Normal
+BorderSizeAuto=false

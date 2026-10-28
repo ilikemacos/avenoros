@@ -1,0 +1,1 @@
+SUBSYSTEM=="block", KERNEL=="sr[0-9]*", ACTION=="add|change", ENV{ID_CDROM_MEDIA}=="1", RUN+="/usr/bin/bash -c '[[ -n $$(/usr/bin/losetup -j $devnode) ]] || /usr/bin/losetup -f -r -P -b 512 $devnode'"

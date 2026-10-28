@@ -1,0 +1,19 @@
+[General]
+BrowserApplication=chromium.desktop
+ColorScheme=Avenor
+font=Inter,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+menuFont=Inter,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+smallestReadableFont=Inter,8,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+toolBarFont=Inter,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+fixed=Noto Sans Mono,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+
+[WM]
+activeFont=Inter,10,-1,5,500,0,0,0,0,0,0,0,0,0,0,1
+
+[KDE]
+widgetStyle=kvantum
+AnimationDurationFactor=0.5
+LookAndFeelPackage=org.avenor.desktop
+
+[Icons]
+Theme=Avenor

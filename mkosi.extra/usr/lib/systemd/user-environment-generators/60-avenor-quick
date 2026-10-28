@@ -1,0 +1,10 @@
+#!/bin/sh
+systemd-detect-virt -qv || exit 0
+for d in /sys/class/drm/card*/device/driver; do
+	case $(basename "$(readlink -f "$d")") in
+		amdgpu|i915|xe|nouveau|nvidia) exit 0 ;;
+	esac
+done
+echo QT_QUICK_BACKEND=software
+echo LP_NUM_THREADS=1
+echo MALLOC_ARENA_MAX=2

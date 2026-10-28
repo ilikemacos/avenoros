@@ -1,0 +1,14 @@
+[Transfer]
+ProtectVersion=%A
+
+[Source]
+Type=url-file
+Path=https://updates.avenoros.org/x86-64/
+MatchPattern=avenoros_@v.usr.raw
+
+[Target]
+Type=partition
+Path=auto
+MatchPattern=avenoros_@v
+MatchPartitionType=usr
+ReadOnly=1
