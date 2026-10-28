@@ -10,3 +10,11 @@ sed -i 's/^Containment=org.kde.plasma.folder$/Containment=org.kde.desktopcontain
 rm -rf /usr/lib/firmware/{bnx2,bnx2x,intel/qat,mediatek/mt7996,mrvl/prestera}
 sed -i -e '/^LOGO=/d' -e '/^PRETTY_NAME=/d' -e '/^NAME=/d' -e '/^HOME_URL=/d' /usr/lib/os-release
 printf 'NAME="AvenorOS"\nPRETTY_NAME="AvenorOS 0.3.2"\nLOGO=avenor\nHOME_URL="https://github.com/ilikemacos/avenoros"\n' >> /usr/lib/os-release
+plot=(python-matplotlib python-numpy python-pillow)
+others=$(pacman -Qi "${plot[@]}" | sed -n 's/^Required By *: //p' | tr ' ' '\n' | grep -vxE 'None|mangohud|python-matplotlib|python-numpy|python-pillow|python-contourpy' || true)
+if [[ -z $others ]]; then
+	pacman -Rdd --noconfirm "${plot[@]}"
+	pacman -Qdtq | xargs -r pacman -Rns --noconfirm
+else
+	echo "keeping ${plot[*]}: needed by $others"
+fi

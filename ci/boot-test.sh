@@ -5,7 +5,7 @@ out=${OUT:-mkosi.output}
 image=$(readlink -f "$out/avenoros_$(sed -n 's/^ImageVersion=//p' mkosi.conf).raw")
 ram_budget=${RAM_BUDGET_MB:-500}
 boot_budget=${BOOT_BUDGET_S:-15}
-size_budget=${SIZE_BUDGET_MB:-2560}
+size_budget=${SIZE_BUDGET_MB:-4096}
 settle=${SETTLE_S:-90}
 ovmf=${OVMF:-/usr/share/OVMF}
 
@@ -22,7 +22,7 @@ truncate -s +4G "$work/disk.raw"
 cp "$ovmf/OVMF_VARS_4M.fd" "$work/vars.fd"
 
 qemu-system-x86_64 \
-	-machine q35,accel="${ACCEL:-kvm}" -cpu "${CPU:-host}" -smp 4 -m 4G \
+	-machine q35,accel="${ACCEL:-kvm}" -cpu "${CPU:-host}" -smp "${SMP:-4}" -m "${MEM:-4G}" \
 	-drive if=pflash,format=raw,readonly=on,file="$ovmf/OVMF_CODE_4M.fd" \
 	-drive if=pflash,format=raw,file="$work/vars.fd" \
 	-drive if=virtio,format=raw,file="$work/disk.raw" \
