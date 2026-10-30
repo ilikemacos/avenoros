@@ -1,0 +1,50 @@
+<!doctype html><html><head><meta charset="utf-8"><title>AvenorOS: The Idiot OS</title><style>*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;color:#0a0a0a;background:#fff;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+nav{display:flex;justify-content:space-between;align-items:center;padding:22px 48px;border-bottom:1px solid #eee}
+.logo{font-weight:600;letter-spacing:-.02em;font-size:18px}
+.links{display:flex;gap:32px;font-size:14px;color:#555}
+.pill{background:#0a0a0a;color:#fff;border-radius:999px;padding:9px 18px;font-size:14px}
+.ghost{border:1px solid #0a0a0a;border-radius:999px;padding:13px 26px;font-size:15px}
+.btn{background:#0a0a0a;color:#fff;border-radius:999px;padding:14px 28px;font-size:15px}
+.hero{text-align:center;padding:110px 24px 60px}
+.eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#888;margin-bottom:22px}
+h1{font-size:88px;letter-spacing:-.045em;font-weight:600;line-height:1}
+.sub{font-size:22px;color:#555;margin:24px 0 40px}
+.ctas{display:flex;gap:14px;justify-content:center}
+.laptop{width:760px;max-width:90%;margin:80px auto 0}
+.screen{border:10px solid #0a0a0a;border-radius:18px 18px 0 0;aspect-ratio:16/10;background:#fafafa;position:relative;overflow:hidden}
+.bar{height:26px;border-bottom:1px solid #e6e6e6;background:#fff;display:flex;justify-content:space-between;align-items:center;padding:0 14px;font-size:11px;color:#333}
+.win{position:absolute;top:70px;left:90px;width:330px;height:200px;background:#fff;border:1px solid #e3e3e3;border-radius:10px;box-shadow:0 18px 40px rgba(0,0,0,.08)}
+.win2{top:120px;left:300px;width:280px;height:170px}
+.dots{padding:10px;display:flex;gap:6px}.dots i{width:9px;height:9px;border-radius:50%;background:#ddd;display:block}
+.line{height:8px;background:#efefef;border-radius:4px;margin:10px 16px}
+.dock{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);background:#fff;border:1px solid #e6e6e6;border-radius:16px;padding:8px;display:flex;gap:8px}
+.dock i{width:30px;height:30px;border-radius:9px;background:#0a0a0a;display:block}.dock i:nth-child(even){background:#d9d9d9}
+.base{height:16px;background:#0a0a0a;border-radius:0 0 22px 22px;width:112%;margin-left:-6%}
+section{max-width:1080px;margin:0 auto;padding:110px 24px;border-top:1px solid #f0f0f0}
+h2{font-size:48px;letter-spacing:-.035em;font-weight:600;margin-bottom:48px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:48px}
+.grid h3{font-size:20px;margin-bottom:10px;font-weight:600}.grid p,.steps p{color:#666;line-height:1.55}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+.num{font-size:14px;color:#999;margin-bottom:12px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);text-align:center}
+.stats b{display:block;font-size:44px;letter-spacing:-.03em;font-weight:600}.stats span{color:#888;font-size:14px}
+ul.no{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:18px;font-size:20px}
+ul.no li:before{content:"✕";margin-right:14px;color:#999}
+footer{text-align:center;padding:50px;color:#999;font-size:13px;border-top:1px solid #eee}
+.card{border:1px solid #e6e6e6;border-radius:22px;padding:48px;display:flex;justify-content:space-between;align-items:center}
+.card h3{font-size:28px;letter-spacing:-.02em}.card p{color:#777;margin-top:8px}
+.small{font-size:13px;color:#888;margin-top:14px;display:flex;gap:18px;justify-content:flex-end}
+table{width:100%;border-collapse:collapse;font-size:17px}td{padding:20px 0;border-bottom:1px solid #eee}td:first-child{color:#888;width:35%}
+.faq h3{font-size:19px;margin:30px 0 8px}.faq p{color:#666}
+</style></head><body>
+<nav><div class="logo">avenorOS</div><div class="links"><a>Overview</a><a>Privacy</a><a href="/download">Download</a></div><a class="pill" href="/download">Get AvenorOS</a></nav>
+<div class="hero"><div class="eyebrow">AvenorOS 1.0</div><h1>The Idiot OS.</h1><p class="sub">Everything just works. Nothing phones home.</p>
+<div class="ctas"><a class="btn" href="/download">Download</a><a class="ghost" href="#how">How it works</a></div>
+<div class="laptop" style="position:relative"><picture><source srcset="/g14.webp" type="image/webp"><img src="/g14.png" width="939" height="652" alt="AvenorOS desktop with the lake wallpaper, top bar and dock, running on an ASUS ROG Zephyrus G14" style="display:block;width:100%;height:auto;position:relative;z-index:1"></picture><div aria-hidden="true" style="position:absolute;left:4%;right:4%;bottom:-14px;height:28px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(0,0,0,.28) 0%,rgba(0,0,0,.12) 45%,rgba(0,0,0,0) 72%);filter:blur(6px)"></div></div></div>
+<section><div class="grid"><div><h3>Private by default.</h3><p>Zero telemetry. Full-disk encryption is planned for the installer.</p></div><div><h3>Built for battery.</h3><p>A trimmed desktop that idles at under 1 GB of RAM.</p></div><div><h3>Fast, and stays fast.</h3><p>Updates land in 1 to 2 seconds. No reboot screen.</p></div></div></section>
+<section id="how"><h2>Updates you never think about.</h2><div class="steps"><div><div class="num">01</div><p>A new version downloads quietly into a spare slot.</p></div><div><div class="num">02</div><p>It's checked and sealed, so nothing can tamper with it.</p></div><div><div class="num">03</div><p>Your desktop restarts in about 2 seconds on the new version.</p></div><div><div class="num">04</div><p>Automatic rollback is coming with the installer.</p></div></div></section>
+<section><h2>What we don't do.</h2><ul class="no"><li>No telemetry</li><li>No ads</li><li>No accounts required</li><li>No background analytics</li><li>No surprise reboots</li><li>No bloat</li></ul></section>
+<section><div class="stats"><div><b>&lt;1 GB</b><span>idle RAM</span></div><div><b>1–2 s</b><span>updates</span></div><div><b>A/B</b><span>automatic rollback</span></div><div><b>LUKS2</b><span>full-disk encryption (planned)</span></div></div></section>
+<footer>AvenorOS. Built on Arch Linux.</footer></body></html>
