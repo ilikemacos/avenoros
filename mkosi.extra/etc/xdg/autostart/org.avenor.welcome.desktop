@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Welcome to AvenorOS
+Icon=avenor
+Exec=avenor-welcome --autostart
+X-KDE-autostart-phase=2
+Terminal=false

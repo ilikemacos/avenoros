@@ -27,7 +27,7 @@ dock.height = 2 * Math.round(gridUnit * 1.8)
 dock.floating = true
 dock.lengthMode = "fit"
 dock.alignment = "center"
-dock.hiding = "none"
+dock.hiding = "dodgewindows"
 dock.opacity = "translucent"
 
 const launcher = dock.addWidget("org.kde.plasma.kickoff")
@@ -40,8 +40,14 @@ tasks.writeConfig("launchers", [
     "applications:chromium.desktop",
     "applications:org.kde.dolphin.desktop",
     "applications:org.kde.konsole.desktop",
+    "applications:steam.desktop",
     "applications:systemsettings.desktop"
 ])
 tasks.writeConfig("showOnlyCurrentDesktop", false)
+tasks.writeConfig("indicateAudioStreams", true)
+tasks.writeConfig("groupingStrategy", 1)
+tasks.writeConfig("middleClickAction", 2)
+tasks.writeConfig("iconSpacing", 2)
 
+dock.addWidget("org.kde.plasma.marginsseparator")
 dock.addWidget("org.kde.plasma.trash")
