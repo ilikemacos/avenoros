@@ -40,6 +40,7 @@ tasks.writeConfig("launchers", [
     "applications:chromium.desktop",
     "applications:org.kde.dolphin.desktop",
     "applications:org.kde.konsole.desktop",
+    "applications:universal-framefx.desktop",
     "applications:systemsettings.desktop"
 ])
 tasks.writeConfig("showOnlyCurrentDesktop", false)

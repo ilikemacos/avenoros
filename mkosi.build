@@ -1,0 +1,25 @@
+#!/bin/bash
+set -euo pipefail
+
+tag=v1.4.1-linux-preview.4
+sum=a78040475893aa44bba347c58fd4b53bbaa73b05576d60571c870e8701ce4e9a
+src=$BUILDDIR/framefx
+tarball=$BUILDDIR/framefx-$tag.tar.gz
+
+if ! echo "$sum  $tarball" | sha256sum -c --status 2>/dev/null; then
+	curl -fsSL -o "$tarball" "https://github.com/ilikemacos/universal-framefx/archive/refs/tags/$tag.tar.gz"
+	echo "$sum  $tarball" | sha256sum -c
+fi
+
+rm -rf "$src"
+mkdir -p "$src"
+tar -xzf "$tarball" -C "$src" --strip-components=2 "universal-framefx-${tag#v}/linux"
+
+cmake -S "$src" -B "$src/build" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr
+cmake --build "$src/build" --target ufx-linux -j"$(nproc)"
+DESTDIR=$DESTDIR cmake --install "$src/build" --strip
+
+install -Dm644 "$src/resources/icon.png" "$DESTDIR/usr/share/icons/hicolor/256x256/apps/universal-framefx.png"
+install -Dm644 "$src/LICENSE" "$DESTDIR/usr/share/licenses/universal-framefx/LICENSE"
+install -Dm644 "$src/NOTICE.md" "$DESTDIR/usr/share/licenses/universal-framefx/NOTICE.md"
+install -Dm755 "$src/scripts/ufx-gamescope-launch.sh" "$DESTDIR/usr/lib/ufx-linux/ufx-gamescope-launch"
