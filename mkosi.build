@@ -1,8 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
-tag=v1.4.1-linux-preview.3
-sum=00c8242c7f5a0284a666ca72a5a96050ad26fe665901dc25be441be291b8f3bc
+tag=v1.4.1-linux-preview.4
+sum=a78040475893aa44bba347c58fd4b53bbaa73b05576d60571c870e8701ce4e9a
 src=$BUILDDIR/framefx
 tarball=$BUILDDIR/framefx-$tag.tar.gz
 
