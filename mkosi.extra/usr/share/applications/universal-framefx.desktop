@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Universal FrameFX
+GenericName=Upscaler and frame generation
+Comment=Upscale and add generated frames to Vulkan games
+Exec=ufx-linux
+Icon=universal-framefx
+Terminal=false
+Categories=Game;Utility;Graphics;
+Keywords=fsr;upscale;frame generation;fps;
+StartupWMClass=ufx-linux
